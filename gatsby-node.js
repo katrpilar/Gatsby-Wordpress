@@ -1,8 +1,13 @@
+// import _ from "lodash"
+// import { Promise }from "bluebird"
+// import { path }from "path"
+// import { slash } from "slash"
+// import 'lodash'
 const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
-// const slash = require(`slash`)
-import { graphql } from "gatsby"
+const slash = require(`slash`)
+// import { graphql } from "gatsby"
 
 
 // Implement the Gatsby API “createPages”. This is
@@ -43,7 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
           _.each(result.data.allWordpressPost.edges, edge => {
             createPage({
               path: edge.node.slug,
-              component: postTemplate,
+              component: slash(postTemplate),
               context: {
                 id: edge.node.id
               },
@@ -55,3 +60,4 @@ exports.createPages = ({ graphql, actions }) => {
     // ==== END POSTS ====
   })
 }
+

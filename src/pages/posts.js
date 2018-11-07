@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React, { Fragment, Component } from "react"
 // import ReactDOM from "react-dom"
 import { graphql } from "gatsby"
 // import ReactHtmlParser from 'react-html-parser'
@@ -11,6 +11,10 @@ import ShareIcon from '@material-ui/icons/Share';
 // import { Link } from "@reach/router";
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
+import Moment from 'react-moment'
+import Hidden from '@material-ui/core/Hidden'
+import { withStyles } from '@material-ui/core/styles';
+
 
 // import '../components/particles.js'
 // import particlesJS from '../components/particles.json'
@@ -64,6 +68,7 @@ const theme = createMuiTheme({
     },
     h1: {
       fontFamily: "Noto Serif",
+      fontSize: '4em'
     },
     h2: {
       fontFamily: "Noto Serif",
@@ -113,11 +118,11 @@ export default ({ data }) => {
     <MuiThemeProvider theme={theme}>
       {/* <script src="../components/particles.js"></script>
       <div id="particles-js" style={partstyle}> */}
-      <Grid container direction="row" >
-      <AppBar position="absolute" elevation={0} style={{backgroundColor: 'transparent', marginTop: '50px'}}>      
+      {/* <Grid container direction="row" > */}
+      <AppBar position="absolute" elevation={0} style={{backgroundColor: 'transparent', marginTop: '50px', marginBottom: '50px'}}>      
         <Toolbar>
-        <img src={Mavenly} style={{height: "100%", width: "180px", position: 'relative', left: '110px'}} />
-        <IconButton color="inherit" aria-label="Menu" style={{position: 'absolute', right: '110px'}}>
+        <img src={Mavenly} style={{height: "100%", width: "180px", position: 'relative', left: '8vw'}} />
+        <IconButton color="inherit" aria-label="Menu" style={{position: 'absolute', right: '8vw'}}>
             <MenuIcon fontSize="large" color={theme.palette.secondary.main}></MenuIcon>
           </IconButton>
           
@@ -139,65 +144,93 @@ export default ({ data }) => {
           </Grid> */}
         </Toolbar>
       </AppBar>
-      </Grid>
-      <div>
+      {/* </Grid> */}
       {/* <div style={{background: 'linear-gradient(to top, #30fd30,#210067)', height: '100%', width: '100%'}}> */}
       {/* <div style={{ backgroundImage: "URL('http://www.saurabhkarwal.com/wp-content/uploads/2018/03/Background-opera-speeddials-community-web-simple-backgrounds.jpg')"}}> */}
-      <Grid container direction="row" style={{ width: '100%'}} >
-      <Grid container direction="row" alignItems="center">
-        <Grid alignContent="center" item xs={12} style={{backgroundImage: `URL(${data.allWordpressPost.edges[0].node.featured_media.source_url})`, height: '750px'}}>
-          <div style={{height: '100%', width: '100%', background: 'linear-gradient(to left,rgb(27, 0, 77, .5), rgb(27, 0, 77, 1), rgb(27, 0, 77, 1))'}}>
-          <Grid container direction="row" style={{height: '100%'}}>
+      <Grid container direction="row" alignItems="center" style={{backgroundImage: `URL(${data.allWordpressPost.edges[0].node.featured_media.source_url})`}}>
+          {/* <div style={{height: '100%', width: '100%', background: 'linear-gradient(to left,rgb(27, 0, 77, .5), rgb(27, 0, 77, 1), rgb(27, 0, 77, 1))'}}> */}
+          <Grid container direction="row" style={{background: 'linear-gradient(to left,rgb(27, 0, 77, .5), rgb(27, 0, 77, 1), rgb(27, 0, 77, 1))'}}>
             {/* <Grid item xs={1} md={4} lg={3} xl={4}></Grid>  */}
             <Grid item xs={1} md={2} lg={1} xl={3} ></Grid>
             <Grid item xs={10} md={8} lg={7} xl={6} alignContent="center" style={{ color: theme.palette.primary.contrastText, height: '100%'}}>
-            <Typography variant="h6" align="left" style={{color: theme.palette.secondary.main,paddingTop: '250px'}}>
-                WE ARE MAVENLY
-              </Typography>
-              <Typography variant="h4" align="left" style={{color: theme.palette.primary.contrastText, fontStyle: 'italic'}}>
-                Better Shopify Solutions By Technology and Marketing Mavens
-              </Typography>
-              <Typography variant="h1" align="left" style={{color: theme.palette.primary.contrastText}}>
-              {data.allWordpressPost.edges[0].node.title}
-              </Typography>
-              <br></br>
-              <br></br>
-
-              <Button variant="outlined" size='large' style={{color: theme.palette.secondary.main, borderColor: theme.palette.secondary.main, padding: '20px'}}>Learn the Latest >>></Button>
+              <Grid container direction="column" spacing={10}>
+                <Hidden only="xs">
+                  <Grid item>
+                    <Typography variant="h6" align="left" style={{color: theme.palette.secondary.main,paddingTop: '18vw', fontSize: '1em'}}>
+                      WE ARE MAVENLY
+                    </Typography>
+                  </Grid>
+                </Hidden>
+                <Hidden only="xs">
+                  <Grid item>
+                    <Typography variant="h5" align="left" style={{color: theme.palette.primary.contrastText, fontStyle: 'italic'}}>
+                      Better Shopify Solutions By Technology and Marketing Mavens
+                    </Typography>
+                  </Grid>
+                </Hidden>
+                <Grid item>
+                  <Hidden only="xs">
+                    <Typography variant="h1" align="left" style={{color: theme.palette.primary.contrastText, [theme.breakpoints.up('lg')]: { fontSize: '6em'}}}>
+                    {data.allWordpressPost.edges[0].node.title}
+                    </Typography>
+                  </Hidden>
+                  <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                    <Typography variant="h3" align="left" style={{paddingTop: '40vw', color: theme.palette.primary.contrastText, [theme.breakpoints.up('lg')]: { fontSize: '6em'}}}>
+                    {data.allWordpressPost.edges[0].node.title}
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item style={{paddingBottom: '15vw',}}>
+                  <Button variant="outlined" size='large' style={{color: theme.palette.secondary.main, borderColor: theme.palette.secondary.main, padding: '15px'}}>Learn the Latest >>></Button>
+                </Grid>                
+              </Grid>
             </Grid>
             
           </Grid>
-          </div>          
-        </Grid>
-        <Grid container style={{backgroundColor: theme.palette.primary.light, height: '100px'}} alignItems="center">
-          <Grid container direction="row" spacing={40} alignItems="center">
-            <Grid item xs={1} md={4} lg={5} xl={4} direction="column">
-              <Typography align="right" style={{color: theme.palette.primary.main}}>Stellar Ecommerce Strategy Insights</Typography>
-              <Typography variant="h4" align="right" style={{color: theme.palette.primary.main}}>Delivered to Your Inbox.</Typography>
-            </Grid>
-            <Grid item xs={10} md={4} lg={3} xl={3} direction="column">
-              <TextField defaultValue="hello@mavenly.com" fullWidth={true}></TextField>
-            </Grid>
-            <Grid item xs={12} md={2} lg={2} xl={2} direction="column">
-              <Button variant="text" style={{paddingLeft: '50px', paddingRight: '50px',backgroundColor: theme.palette.primary.main, color: '#ffffff'}}>Subscribe</Button>
+          {/* </div>           */}
+        <Hidden only={['sm','xs']}>
+          <Grid container style={{backgroundColor: theme.palette.primary.light}} alignItems="center">
+            <Grid container direction="row" spacing={40} alignItems="flex-end" style={{paddingBottom: '20px'}}>
+              <Grid item xs={12} sm={12} md={4} lg={5} xl={4} >
+                <Typography align="right" style={{color: theme.palette.primary.main, paddingTop: '20px'}}>Stellar Ecommerce Strategy Insights</Typography>
+                <Typography variant="h4" align="right" style={{color: theme.palette.primary.main}}>Delivered to Your Inbox.</Typography>
+              </Grid>
+              <Grid item xs={12} sm={8} md={4} lg={3} xl={3} >
+                <TextField fullWidth={true}></TextField>
+              </Grid>
+              <Grid item xs={12} sm={2} md={2} lg={2} xl={2} >
+                <Button  variant="text" style={{ position:'relative', paddingLeft: '30px', paddingRight: '30px',backgroundColor: theme.palette.primary.main, color: '#ffffff'}}>Subscribe</Button>
+              </Grid>
             </Grid>
           </Grid>
+        </Hidden>
+        <Hidden only={['md','lg', 'xl']}>
+          <Grid container direction="column" spacing={40} style={{backgroundColor: theme.palette.primary.light, paddingBottom: '20px'}} alignItems="center">
+              <Grid item xs={12} sm={12} >
+                <Typography align="center" style={{color: theme.palette.primary.main, paddingTop: '20px'}}>Stellar Ecommerce Strategy Insights</Typography>
+                <Typography variant="h4" align="center" style={{color: theme.palette.primary.main}}>Delivered to Your Inbox.</Typography>
+                <TextField fullWidth={true}></TextField>
+              </Grid>
+              <Grid item xs={3} sm={4}></Grid>
+              <Grid item xs={6} sm={4}>
+                <Button variant="text" style={{ position:'relative', paddingLeft: '30px', paddingRight: '30px',backgroundColor: theme.palette.primary.main, color: '#ffffff'}}>Subscribe</Button>
+              </Grid>
+          </Grid>
+        </Hidden>
 
-        </Grid>
-        <Grid item xs={12}>
-        
-        </Grid>
       </Grid>
+      {/* #171823 */}
 
-      <Grid container direction="column" alignItems="center" style={{paddingTop: "80px"}}>
-        <Grid item xs={12} md={12} lg={8} xl={8}>
-        <Grid container spacing={40}>
+      <Grid container direction="column" alignItems="center" style={{paddingTop: "80px", backgroundColor: 'rgb(239, 239, 239)'}}>
+        <Grid item xs={12} md={12} lg={10} xl={10}>
+        <Grid container direction="row" spacing={24}>
         {data.allWordpressPost.edges.map(({ node, index }) => (
           <Fragment key={index}>
-            <Grid item xs={12} md={6} lg={4} xl={4}>
-              <Card key={index} raised={false} square={true} elevation={2} style={{backgroundColor: "transparent", color: '#ffffff'}}>
-              <CardActionArea>
-              <CardHeader key={index} title={node.title} subheader={node.date} titleTypographyProps="color={theme.palette.primary.constrastText}"/>
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <Card key={index} raised={false} square={true} elevation={6} style={{color: theme.palette.secondary.contrastText }}>
+              <CardActionArea style={{}}>
+              <CardHeader key={index} title={node.title} titleTypographyProps={{color:"inherit", variant:'h4'}} subheader={<Moment format="MMMM D, YYYY">{node.date}</Moment>} style={{}} />
+              {/* <CardHeader key={index} title={node.title} subheader={<Moment format="M.D.YY">{node.date}</Moment>} titleTypographyProps="color={theme.palette.primary.constrastText}"/> */}
                     {/* <Typography key={index} variant="h4" color="primary" style={{textTransform: "capitalize"}}>{node.title}</Typography> */}
                 
                   {node.featured_media ? <CardMedia key={index} image={node.featured_media.source_url} style={{height: "0",
@@ -213,13 +246,13 @@ export default ({ data }) => {
                       rgba(255,255,255, 0), 
                       rgba(255,255,255, 1) 90%)` }}> */}
                     <div style={{overflow: "hidden", maxHeight: "100px"}}>
-                      <Typography key={index} variant="body1" >{ striptags(node.excerpt)}</Typography>
+                      <Typography key={index} variant="body1" color={theme.palette.secondary.contrastText}>{ striptags(node.excerpt)}</Typography>
                     </div>
                     {/* </div> */}
                     {/* <Typography key={index} variant="body1" noWrap>{ ReactHtmlParser(node.content) }</Typography> */}
                   </CardContent>
                 </CardActionArea>                          
-                <CardActions style={{ color: theme.palette.secondary.contrastText}} >
+                <CardActions style={{ color: theme.palette.secondary.contrastText, backgroundColor: theme.palette.primary.light}} >
                   <Grid container direction="row">
                       <Grid item xs={6} >
                         <Button key={index} variant="text" color="inherit" href={`/${node.slug}`}>Read Now ></Button>
@@ -240,8 +273,6 @@ export default ({ data }) => {
           </Grid>
         </Grid>
       </Grid>
-      </Grid> 
-      </div>
         
 
       {/* </div> */}
